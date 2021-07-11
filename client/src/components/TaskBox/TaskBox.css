@@ -1,0 +1,45 @@
+.task-box {
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.task-box input {
+    width: 2%;
+    margin: 0;
+}
+
+.task-box .task-title {
+    width: 90%;
+    margin-left: 1%;
+    font-size: 17px;
+    letter-spacing: 0.8px;
+}
+
+.task-box .actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 7%;
+}
+
+.task-box .actions div {
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.task-box .actions div:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.task-box .actions div.edit-task {
+    color: #555;
+}
+
+.task-box .actions div.remove-task {
+    color: #ff0000;
+}
+
+.task-box .actions div:first-of-type {
+    margin-right: 10px;
+}

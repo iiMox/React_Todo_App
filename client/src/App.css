@@ -19,7 +19,7 @@ h1 {
 }
 
 .content {
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
     background-color: #f3f3f3;
     border-radius: 5px;
@@ -32,8 +32,8 @@ h1 {
 }
 
 .content form input {
-    padding: 5px 10px;
-    width: 75%;
+    padding: 10px 15px;
+    width: 80%;
     border: 1px solid #e5e5e5;
     border-right: none;
     color: #bbb;
@@ -41,9 +41,14 @@ h1 {
     font-size: 15px;
 }
 
+.content form input::placeholder {
+    color: #bbb;
+    font-size: 15px;
+}
+
 .content form button {
-    width: 25%;
-    padding: 5px;
+    width: 20%;
+    padding: 10px 15px;
     background-color: #00fa9a;
     border: 1px solid #e5e5e5;
     color: #fff;
@@ -51,4 +56,10 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
+}
+
+.content hr {
+    height: 1px;
+    border: none;
+    background-color: #fff;
 }
