@@ -1,50 +1,66 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./TaskBox.css";
 
-const TaskBox = ({ id, title, date, checked }) => {
-    const [task, setTask] = useState(null);
-    const [tasks, setTasks] = useState([]);
+const TaskBox = (props) => {
+    const [reload, setReload] = useState(false);
+
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => state.tasks.tasks);
+    const task = useSelector((state) => state.tasks.task);
+
     useEffect(() => {
-        setTask({ id, title, date, checked });
-        setTasks(JSON.parse(localStorage.getItem("tasks")));
+        setReload(false);
     }, []);
-    return task ? (
+
+    return (
         <div className="task-box">
             <input
                 type="checkbox"
-                checked={task.checked}
+                checked={props.task.checked}
                 onChange={(e) => {
-                    const array = [];
-                    tasks.forEach((task) => {
-                        if (task.id === id) {
-                            array.push({
-                                id,
-                                title,
-                                date,
-                                checked: e.target.checked,
-                            });
-                        } else {
-                            array.push(task);
-                        }
+                    const nTask = {
+                        id: props.task.id,
+                        title: props.task.title,
+                        date: props.task.date,
+                        checked: e.target.checked,
+                    };
+                    dispatch({ type: "SET_TASK", payload: nTask });
+                    dispatch({
+                        type: "EDIT_TASK",
+                        payload: {
+                            id: props.task.id,
+                            checked: e.target.checked,
+                        },
                     });
-                    setTasks(array);
-                    localStorage.setItem("tasks", JSON.stringify(tasks));
-                    setTask({ ...task, checked: e.target.checked });
+                    setReload(true);
                 }}
             />
-            <div className="task-title">{task.title}</div>
+            <div
+                className={`task-title ${
+                    props.task.checked ? `decorated` : ``
+                }`}
+            >
+                {props.task.title}
+            </div>
             <div className="actions">
-                <div className="edit-task">
-                    <i className="far fa-edit"></i>
-                </div>
-                <div className="remove-task">
+                <div
+                    className="remove-task"
+                    onClick={() => {
+                        dispatch({
+                            type: "DELETE_TASK",
+                            payload: { id: props.task.id },
+                        });
+                        setReload(true);
+                    }}
+                >
                     <i className="fas fa-trash"></i>
                 </div>
             </div>
         </div>
-    ) : null;
+    );
 };
 
 export default TaskBox;

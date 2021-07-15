@@ -17,10 +17,14 @@
     letter-spacing: 0.8px;
 }
 
+.task-box .task-title.decorated {
+    text-decoration: line-through;
+}
+
 .task-box .actions {
     display: flex;
-    justify-content: space-evenly;
     width: 7%;
+    justify-content: flex-end;
 }
 
 .task-box .actions div {
@@ -38,8 +42,4 @@
 
 .task-box .actions div.remove-task {
     color: #ff0000;
-}
-
-.task-box .actions div:first-of-type {
-    margin-right: 10px;
 }

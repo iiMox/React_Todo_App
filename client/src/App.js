@@ -1,45 +1,48 @@
 import React from "react";
 import TaskBox from "./components/TaskBox";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./App.css";
 
 const App = () => {
-    const [newTask, setNewTask] = useState(null);
-    const [tasks, setTasks] = useState([]);
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => state.tasks.tasks);
+
+    const [newTask, setNewTask] = useState({ checked: false });
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        setTasks(JSON.parse(localStorage.getItem("tasks")));
+        if (localStorage.getItem("tasks")) {
+            dispatch({
+                type: "GET_TASK",
+                payload: localStorage.getItem("tasks"),
+            });
+        }
+        setReload(false);
+
+        /* return () => {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }; */
     }, []);
 
     const onClick = (e) => {
         e.preventDefault();
-        const taskArray =
-            localStorage.getItem("tasks") !== null
-                ? JSON.parse(localStorage.getItem("tasks"))
-                : [];
-        taskArray.push({
-            ...newTask,
-            id: Math.random() * 10000000000,
-            checked: false,
-        });
-        localStorage.setItem("tasks", JSON.stringify(taskArray));
-        setTasks(JSON.parse(localStorage.getItem("tasks")));
+        dispatch({ type: "ADD_TASK", payload: newTask });
+        setReload(true);
     };
 
     const outPut = [];
+    const today = new Date();
+    const stToday = `${today.getFullYear()}-0${
+        today.getMonth() + 1
+    }-${today.getDate()}`;
     let i = 0;
-    tasks?.forEach((task) => {
-        outPut.push(
-            <TaskBox
-                key={i}
-                title={task.title}
-                date={task.date}
-                checked={task.checked}
-                id={task.id}
-            />
-        );
-        i++;
+    tasks.forEach((task) => {
+        if (task.date === stToday) {
+            outPut.push(<TaskBox key={i} task={task} />);
+            i++;
+        }
     });
 
     return (
@@ -55,6 +58,7 @@ const App = () => {
                                 setNewTask({
                                     ...newTask,
                                     title: e.target.value,
+                                    id: parseInt(Math.random() * 10000000000),
                                 })
                             }
                         />
@@ -70,7 +74,7 @@ const App = () => {
                 <hr />
                 <div className="my-tasks">
                     {outPut.length !== 0 ? (
-                        outPut
+                        outPut.reverse()
                     ) : (
                         <div
                             style={{
