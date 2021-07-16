@@ -13,8 +13,9 @@
 .task-box .task-title {
     width: 90%;
     margin-left: 1%;
-    font-size: 17px;
+    font-size: 18px;
     letter-spacing: 0.8px;
+    color: #585858;
 }
 
 .task-box .task-title.decorated {
@@ -34,10 +35,6 @@
 
 .task-box .actions div:hover {
     transform: scale(1.1, 1.1);
-}
-
-.task-box .actions div.edit-task {
-    color: #555;
 }
 
 .task-box .actions div.remove-task {

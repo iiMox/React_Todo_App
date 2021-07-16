@@ -63,3 +63,21 @@ h1 {
     border: none;
     background-color: #fff;
 }
+
+.content .control-date {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin: 10px auto;
+    color: #585858;
+}
+
+.content .control-date .actual {
+    font-size: 18px;
+    letter-spacing: 0.8px;
+}
+
+.content .control-date .prev,
+.content .control-date .next {
+    cursor: pointer;
+}

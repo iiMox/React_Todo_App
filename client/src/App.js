@@ -11,6 +11,7 @@ const App = () => {
 
     const [newTask, setNewTask] = useState({ checked: false });
     const [reload, setReload] = useState(false);
+    const [day, setDay] = useState(new Date());
 
     useEffect(() => {
         if (localStorage.getItem("tasks")) {
@@ -30,10 +31,9 @@ const App = () => {
     };
 
     const outPut = [];
-    const today = new Date();
-    const stToday = `${today.getFullYear()}-0${
-        today.getMonth() + 1
-    }-${today.getDate()}`;
+    const stToday = `${day.getFullYear()}-0${
+        day.getMonth() + 1
+    }-${day.getDate()}`;
     let i = 0;
     tasks.forEach((task) => {
         if (task.date === stToday) {
@@ -41,6 +41,17 @@ const App = () => {
             i++;
         }
     });
+
+    const whatToRender = () => {
+        const d = new Date();
+        if (d.getDate() === day.getDate()) {
+            return "Today";
+        } else if (d.getDate() === day.getDate() + 1) {
+            return "Yesterday";
+        } else if (d.getDate() === day.getDate() - 1) {
+            return "Tommorow";
+        } else return day.toDateString();
+    };
 
     return (
         <div>
@@ -69,6 +80,29 @@ const App = () => {
                     </form>
                 </div>
                 <hr />
+                <div className="control-date">
+                    <div
+                        className="prev"
+                        onClick={() => {
+                            const d = new Date();
+                            d.setDate(day.getDate() - 1);
+                            setDay(d);
+                        }}
+                    >
+                        <i className="fas fa-chevron-left"></i>
+                    </div>
+                    <div className="actual">{whatToRender()}</div>
+                    <div
+                        className="next"
+                        onClick={() => {
+                            const d = new Date();
+                            d.setDate(day.getDate() + 1);
+                            setDay(d);
+                        }}
+                    >
+                        <i className="fas fa-chevron-right"></i>
+                    </div>
+                </div>
                 <div className="my-tasks">
                     {outPut.length !== 0 ? (
                         outPut.reverse()
