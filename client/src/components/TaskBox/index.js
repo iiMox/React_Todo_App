@@ -9,7 +9,6 @@ const TaskBox = (props) => {
 
     const dispatch = useDispatch();
     const tasks = useSelector((state) => state.tasks.tasks);
-    const task = useSelector((state) => state.tasks.task);
 
     useEffect(() => {
         setReload(false);
@@ -27,7 +26,7 @@ const TaskBox = (props) => {
                         date: props.task.date,
                         checked: e.target.checked,
                     };
-                    dispatch({ type: "SET_TASK", payload: nTask });
+                    dispatch({ type: "GET_TASK", payload: nTask });
                     dispatch({
                         type: "EDIT_TASK",
                         payload: {
@@ -35,6 +34,12 @@ const TaskBox = (props) => {
                             checked: e.target.checked,
                         },
                     });
+                    const nArray = [...tasks];
+                    const index = nArray.findIndex(
+                        (elt) => elt.id === props.task.id
+                    );
+                    nArray[index] = { ...nTask };
+                    localStorage.setItem("tasks", JSON.stringify(nArray));
                     setReload(true);
                 }}
             />
@@ -53,6 +58,10 @@ const TaskBox = (props) => {
                             type: "DELETE_TASK",
                             payload: { id: props.task.id },
                         });
+                        const nArray = tasks.filter(
+                            (task) => task.id !== props.task.id
+                        );
+                        localStorage.setItem("tasks", JSON.stringify(nArray));
                         setReload(true);
                     }}
                 >

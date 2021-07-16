@@ -34,8 +34,6 @@ export default function (state = initialState, action) {
                 ...state,
                 tasks: payload,
             };
-        case "SET_TASK":
-            return { ...state, task: payload };
         default:
             return state;
     }

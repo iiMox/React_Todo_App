@@ -15,20 +15,17 @@ const App = () => {
     useEffect(() => {
         if (localStorage.getItem("tasks")) {
             dispatch({
-                type: "GET_TASK",
-                payload: localStorage.getItem("tasks"),
+                type: "GET_TASKS",
+                payload: JSON.parse(localStorage.getItem("tasks")),
             });
         }
         setReload(false);
-
-        /* return () => {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }; */
     }, []);
 
     const onClick = (e) => {
         e.preventDefault();
         dispatch({ type: "ADD_TASK", payload: newTask });
+        localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
         setReload(true);
     };
 
@@ -68,7 +65,7 @@ const App = () => {
                                 setNewTask({ ...newTask, date: e.target.value })
                             }
                         />
-                        <button onClick={(e) => onClick(e)}>Add</button>
+                        <button onClick={onClick}>Add</button>
                     </form>
                 </div>
                 <hr />
