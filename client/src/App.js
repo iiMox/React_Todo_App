@@ -157,10 +157,16 @@ const App = () => {
                             Total tasks today : <span>{nbrTasks}</span>
                         </li>
                         <li>
-                            Tasks completed : <span>{nbrTasksDone}</span>
+                            Tasks completed :{" "}
+                            <span style={{ colo: "#00fa9a" }}>
+                                {nbrTasksDone}
+                            </span>
                         </li>
                         <li>
-                            Tasks waiting for you : <span>{nbrTasksWaits}</span>
+                            Tasks waiting for you :{" "}
+                            <span style={{ color: "#ff0000" }}>
+                                {nbrTasksWaits}
+                            </span>
                         </li>
                     </ul>
                 </div>
