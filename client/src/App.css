@@ -18,14 +18,19 @@ h1 {
     text-transform: uppercase;
 }
 
+.flex-container {
+    display: flex;
+    padding-left: 30%;
+}
+
 .content {
     width: 50%;
-    margin: 0 auto;
     background-color: #f3f3f3;
     border-radius: 5px;
     border: 1px solid #e7e7e7;
     padding: 8px 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-right: 20px;
 }
 .content form {
     margin: 10px 0;
@@ -39,6 +44,7 @@ h1 {
     color: #bbb;
     outline: none;
     font-size: 15px;
+    height: 44px;
 }
 
 .content form input::placeholder {
@@ -56,6 +62,20 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
+    height: 44px;
+}
+
+.content .erreur {
+    background-color: red;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.content .erreur.visible {
+    padding: 10px;
 }
 
 .content hr {
@@ -80,4 +100,49 @@ h1 {
 .content .control-date .prev,
 .content .control-date .next {
     cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+.content .control-date .next:hover {
+    transform: translateX(3px);
+}
+
+.content .control-date .prev:hover {
+    transform: translateX(-3px);
+}
+
+.stats {
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    width: 25%;
+    padding: 5px 10px;
+    border: 1px solid #e7e7e7;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.stats h2 {
+    color: #585858;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.stats hr {
+    height: 1px;
+    border: none;
+    background-color: #fff;
+}
+
+.stats ul {
+    list-style: none;
+    padding-left: 10px;
+    color: #585858;
+    letter-spacing: 0.8px;
+}
+
+.stats ul li {
+    margin-bottom: 10px;
+}
+
+.stats ul li span {
+    font-weight: bold;
 }
