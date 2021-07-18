@@ -158,7 +158,7 @@ const App = () => {
                         </li>
                         <li>
                             Tasks completed :{" "}
-                            <span style={{ colo: "#00fa9a" }}>
+                            <span style={{ color: "#00fa9a" }}>
                                 {nbrTasksDone}
                             </span>
                         </li>
